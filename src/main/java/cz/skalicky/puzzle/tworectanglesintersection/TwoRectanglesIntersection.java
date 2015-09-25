@@ -2,7 +2,7 @@ package cz.skalicky.puzzle.tworectanglesintersection;
 
 import org.springframework.util.Assert;
 
-public class Solution {
+public class TwoRectanglesIntersection {
 
     private static class Point {
         private final int x;
@@ -16,16 +16,14 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        final Solution solution = new Solution();
-
-        Assert.isTrue(solution.solution(0, 2, 5, 10, 3, 1, 20, 15) == 16);
-        Assert.isTrue(solution.solution(0, 2, 5, 10, 5, 1, 20, 15) == 0);
-        Assert.isTrue(solution.solution(0, 2, 5, 10, 5, 10, 20, 15) == 0);
-        Assert.isTrue(solution.solution(0, 2, 5, Integer.MAX_VALUE / 2, 2, 10, 20, Integer.MAX_VALUE) == -1);
+        Assert.isTrue(solve(0, 2, 5, 10, 3, 1, 20, 15) == 16);
+        Assert.isTrue(solve(0, 2, 5, 10, 5, 1, 20, 15) == 0);
+        Assert.isTrue(solve(0, 2, 5, 10, 5, 10, 20, 15) == 0);
+        Assert.isTrue(solve(0, 2, 5, Integer.MAX_VALUE / 2, 2, 10, 20, Integer.MAX_VALUE) == -1);
         System.out.println("SUCCESS");
     }
 
-    private int solution(final int k, final int l, final int m, final int n, final int p, final int q,
+    private static int solve(final int k, final int l, final int m, final int n, final int p, final int q,
             final int r, final int s) {
         final Point rectangle1LowerLeft = new Point(k, l);
         final Point rectangle1UpperRight = new Point(m, n);
