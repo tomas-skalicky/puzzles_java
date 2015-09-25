@@ -1,4 +1,4 @@
-package cz.skalicky.puzzle.tworectanglesintersetion;
+package cz.skalicky.puzzle.tworectanglesintersection;
 
 import org.springframework.util.Assert;
 
