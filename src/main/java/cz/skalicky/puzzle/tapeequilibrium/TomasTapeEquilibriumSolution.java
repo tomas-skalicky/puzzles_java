@@ -1,15 +1,12 @@
 package cz.skalicky.puzzle.tapeequilibrium;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
-
-import org.springframework.util.Assert;
 
 /**
  * @see https://codility.com/programmers/task/tape_equilibrium
  * @author Tomas Skalicky
  */
-class TapeEquilibrium {
+class TomasTapeEquilibriumSolution implements TapeEquilibriumSolution {
 
     private static class CalculationState {
 
@@ -36,34 +33,19 @@ class TapeEquilibrium {
         }
     }
 
-    public static void main(String[] args) {
-
-        runTest(new int[] { 1 }, -1);
-        runTest(new int[] { 1, 2 }, 1);
-        runTest(new int[] { 1, 2, 3 }, 0);
-        runTest(new int[] { 1, 0, -1 }, 2);
-        runTest(new int[] { 3, 1, 2, 4, 3 }, 1);
-        System.out.println("SUCCESS");
-    }
-
-    private static void runTest(final int[] tape, final int expectedMinDifference) {
-
-        Assert.isTrue(getMinDifference(tape) == expectedMinDifference, String.format(
-                "Min difference in tape %s should be %d.", Arrays.toString(tape), expectedMinDifference));
-    }
-
-    private static int getMinDifference(final int[] tape) {
+    @Override
+    public int solution(int[] tape) {
 
         if (tape.length < 2) {
             return -1;
         }
 
-        final int tapeSum = Arrays.stream(tape).sum();
+        final int tapeSum = Arrays.stream(tape).parallel().sum();
         final CalculationState state = new CalculationState(0, tapeSum);
         // @formatter:off
-        final int minDifference =
-                IntStream.range(0, tape.length - 1)
-                .map(i -> state.moveRightAndGetDifference(tape[i]))
+        final int minDifference = Arrays.stream(tape)
+                .limit(tape.length - 1)
+                .map(n -> state.moveRightAndGetDifference(n))
                 .min().getAsInt();
         // @formatter:on
         return minDifference;
